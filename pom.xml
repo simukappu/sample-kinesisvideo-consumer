@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.example.aws</groupId>
+	<artifactId>sample-kinesisvideo-consumer</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>sample-kinesisvideo-consumer</name>
+	<description>Sample consumer for Amazon Kinesis Video Streams</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+
+		<java.version>1.8</java.version>
+		<aws-java-sdk.version>1.11.255</aws-java-sdk.version>
+		<amazon-kinesis-video-parser.version>1.0.2</amazon-kinesis-video-parser.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.amazonaws</groupId>
+				<artifactId>aws-java-sdk-bom</artifactId>
+				<version>${aws-java-sdk.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-kinesisvideo</artifactId>
+		</dependency>
+		<!-- TODO Make dependency for amazon-kinesis-video-streams-parser-library 
+			to use Maven when it is published to central repository -->
+		<dependency>
+			<groupId>org.freedesktop.gstreamer</groupId>
+			<artifactId>gst1-java-core</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+	</dependencies>
+</project>
