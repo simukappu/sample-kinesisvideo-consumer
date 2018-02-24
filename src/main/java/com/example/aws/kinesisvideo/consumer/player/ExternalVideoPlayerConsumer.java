@@ -1,4 +1,4 @@
-package com.example.aws.kinesisvideo.consumer;
+package com.example.aws.kinesisvideo.consumer.player;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -18,7 +18,7 @@ import com.amazonaws.kinesisvideo.parser.mkv.MkvEndMasterElement;
 import com.amazonaws.kinesisvideo.parser.mkv.StreamingMkvReader;
 import com.amazonaws.kinesisvideo.parser.utilities.OutputSegmentMerger;
 import com.amazonaws.services.kinesisvideo.model.GetMediaResult;
-import com.example.aws.kinesisvideo.AbstractKinesisVideoConsumer;
+import com.example.aws.kinesisvideo.base.AbstractKinesisVideoConsumer;
 
 public class ExternalVideoPlayerConsumer extends AbstractKinesisVideoConsumer {
 

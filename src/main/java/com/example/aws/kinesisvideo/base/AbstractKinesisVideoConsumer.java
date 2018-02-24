@@ -1,4 +1,4 @@
-package com.example.aws.kinesisvideo;
+package com.example.aws.kinesisvideo.base;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

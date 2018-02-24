@@ -13,7 +13,12 @@
 
 		<java.version>1.8</java.version>
 		<aws-java-sdk.version>1.11.255</aws-java-sdk.version>
-		<amazon-kinesis-video-parser.version>1.0.2</amazon-kinesis-video-parser.version>
+		<amazon-kinesis-video-parser.version>1.0.3</amazon-kinesis-video-parser.version>
+
+		<gstreamer-java.version>0.9.1</gstreamer-java.version>
+		<jcodec.version>0.2.2</jcodec.version>
+		<javacv.version>1.4</javacv.version>
+		<opencv.version>3.4.0-${javacv.version}</opencv.version>
 	</properties>
 
 	<build>
@@ -52,7 +57,93 @@
 		<dependency>
 			<groupId>org.freedesktop.gstreamer</groupId>
 			<artifactId>gst1-java-core</artifactId>
-			<version>0.9.1</version>
+			<version>${gstreamer-java.version}</version>
+		</dependency>
+		<!-- Frame Decode/View -->
+		<dependency>
+			<groupId>org.jcodec</groupId>
+			<artifactId>jcodec</artifactId>
+			<version>${jcodec.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jcodec</groupId>
+			<artifactId>jcodec-javase</artifactId>
+			<version>${jcodec.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.bytedeco</groupId>
+			<artifactId>javacv</artifactId>
+			<version>${javacv.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bytedeco.javacpp-presets</groupId>
+			<artifactId>opencv</artifactId>
+			<version>${opencv.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bytedeco.javacpp-presets</groupId>
+			<artifactId>opencv</artifactId>
+			<version>${opencv.version}</version>
+			<classifier>${classifier}</classifier>
+			<!--
+			<classifier>windows-x86_64</classifier>
+			<classifier>linux-x86_64</classifier>
+			<classifier>macosx-x86_64</classifier>
+			<classifier>windows-x86</classifier>
+			<classifier>linux-x86</classifier>
+			-->
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>macosx-x86_64</id>
+			<activation>
+				<os>
+					<family>mac</family>
+					<arch>x86_64</arch>
+				</os>
+			</activation>
+			<properties>
+				<classifier>macosx-x86_64</classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>linux-x86_64</id>
+			<activation>
+				<os>
+					<family>unix</family>
+					<arch>amd64</arch>
+				</os>
+			</activation>
+			<properties>
+				<classifier>linux-x86_64</classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>windows-x86_64</id>
+			<activation>
+				<os>
+					<family>windows</family>
+					<arch>amd64</arch>
+				</os>
+			</activation>
+			<properties>
+				<classifier>windows-x86_64</classifier>
+			</properties>
+		</profile>
+		<profile>
+			<id>windows-x86</id>
+			<activation>
+				<os>
+					<family>windows</family>
+					<arch>x86</arch>
+				</os>
+			</activation>
+			<properties>
+				<classifier>windows-x86</classifier>
+			</properties>
+		</profile>
+	</profiles>
 </project>

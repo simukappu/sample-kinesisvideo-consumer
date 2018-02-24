@@ -1,4 +1,4 @@
-package com.example.aws.kinesisvideo.consumer;
+package com.example.aws.kinesisvideo.consumer.player;
 
 import java.awt.EventQueue;
 import java.io.BufferedOutputStream;
@@ -22,7 +22,7 @@ import com.amazonaws.kinesisvideo.parser.mkv.MkvEndMasterElement;
 import com.amazonaws.kinesisvideo.parser.mkv.StreamingMkvReader;
 import com.amazonaws.kinesisvideo.parser.utilities.OutputSegmentMerger;
 import com.amazonaws.services.kinesisvideo.model.GetMediaResult;
-import com.example.aws.kinesisvideo.AbstractKinesisVideoConsumer;
+import com.example.aws.kinesisvideo.base.AbstractKinesisVideoConsumer;
 
 public class GStreamerPlayerConsumer extends AbstractKinesisVideoConsumer {
 
