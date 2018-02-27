@@ -48,18 +48,25 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- Kinesis Video Streams libraries -->
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-kinesisvideo</artifactId>
 		</dependency>
-		<!-- TODO Make dependency for amazon-kinesis-video-streams-parser-library 
-			to use Maven when it is published to central repository -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>amazon-kinesis-video-streams-parser-library</artifactId>
+			<version>${amazon-kinesis-video-parser.version}</version>
+		</dependency>
+
+		<!-- GStreamer for player or video pipeline -->
 		<dependency>
 			<groupId>org.freedesktop.gstreamer</groupId>
 			<artifactId>gst1-java-core</artifactId>
 			<version>${gstreamer-java.version}</version>
 		</dependency>
-		<!-- Frame Decode/View -->
+
+		<!-- JCodec for frame decoder -->
 		<dependency>
 			<groupId>org.jcodec</groupId>
 			<artifactId>jcodec</artifactId>
@@ -71,6 +78,7 @@
 			<version>${jcodec.version}</version>
 		</dependency>
 
+		<!-- OpenCV for computer vision -->
 		<dependency>
 			<groupId>org.bytedeco</groupId>
 			<artifactId>javacv</artifactId>
