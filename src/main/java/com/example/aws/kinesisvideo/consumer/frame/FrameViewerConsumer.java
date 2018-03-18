@@ -2,9 +2,9 @@ package com.example.aws.kinesisvideo.consumer.frame;
 
 import java.awt.image.BufferedImage;
 
+import com.amazonaws.kinesisvideo.parser.examples.KinesisVideoFrameViewer;
 import com.example.aws.kinesisvideo.base.AbstractFrameExtractorConsumer;
 import com.example.aws.kinesisvideo.base.AbstractKinesisVideoConsumer;
-import com.example.aws.kinesisvideo.viewer.KinesisVideoFrameViewer;
 
 public class FrameViewerConsumer extends AbstractFrameExtractorConsumer {
 

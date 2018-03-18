@@ -13,9 +13,9 @@ import org.bytedeco.javacpp.opencv_core.Scalar;
 import org.bytedeco.javacpp.opencv_objdetect.CascadeClassifier;
 import org.bytedeco.javacv.Java2DFrameUtils;
 
+import com.amazonaws.kinesisvideo.parser.examples.KinesisVideoFrameViewer;
 import com.example.aws.kinesisvideo.base.AbstractFrameExtractorConsumer;
 import com.example.aws.kinesisvideo.base.AbstractKinesisVideoConsumer;
-import com.example.aws.kinesisvideo.viewer.KinesisVideoFrameViewer;
 
 public class OpenCVFrameProcessorConsumer extends AbstractFrameExtractorConsumer {
 
