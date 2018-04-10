@@ -3,7 +3,6 @@ package com.example.aws.kinesisvideo.base;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
@@ -76,14 +75,14 @@ public abstract class AbstractKinesisVideoConsumer {
 	}
 
 	public void prepareMediaClient() {
-		AmazonKinesisVideo client = AmazonKinesisVideoClientBuilder.standard().withCredentials(new ProfileCredentialsProvider())
+		AmazonKinesisVideo client = AmazonKinesisVideoClientBuilder.standard()
 				.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpointUrl, region.getName())).build();
 
 		String getMediaEndpoint = client
 				.getDataEndpoint(new GetDataEndpointRequest().withStreamName(streamName).withAPIName(APIName.GET_MEDIA)).getDataEndpoint();
 		LOG.info("GetMedia endpoint: " + getMediaEndpoint);
 
-		this.mediaClient = AmazonKinesisVideoMediaClient.builder().withCredentials(new ProfileCredentialsProvider())
+		this.mediaClient = AmazonKinesisVideoMediaClient.builder()
 				.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(getMediaEndpoint, region.getName())).build();
 	}
 
