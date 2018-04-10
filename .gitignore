@@ -49,4 +49,7 @@ hs_err_pid*
 
 # Generated MKV Files
 *.mkv
+image
 images
+video
+videos

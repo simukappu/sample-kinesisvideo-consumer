@@ -17,7 +17,7 @@ import com.amazonaws.kinesisvideo.parser.examples.KinesisVideoFrameViewer;
 import com.example.aws.kinesisvideo.base.AbstractFrameExtractorConsumer;
 import com.example.aws.kinesisvideo.base.AbstractKinesisVideoConsumer;
 
-public class OpenCVFrameProcessorConsumer extends AbstractFrameExtractorConsumer {
+public class OpencvFrameProcessorConsumer extends AbstractFrameExtractorConsumer {
 
 	private static final int VIEWER_WIDTH = Integer.parseInt(System.getProperty("viewer.width", "1280"));
 	private static final int VIEWER_HEIGHT = Integer.parseInt(System.getProperty("viewer.height", "720"));
@@ -25,11 +25,11 @@ public class OpenCVFrameProcessorConsumer extends AbstractFrameExtractorConsumer
 	private CascadeClassifier faceDetector;
 	private KinesisVideoFrameViewer kinesisVideoFrameViewer;
 
-	public OpenCVFrameProcessorConsumer() {
+	public OpencvFrameProcessorConsumer() {
 		super();
 		try {
 			String classifierName = Paths
-					.get(OpenCVFrameProcessorConsumer.class.getResource("/haarcascade_frontalface_default.xml").toURI()).toString();
+					.get(OpencvFrameProcessorConsumer.class.getResource("/haarcascade_frontalface_default.xml").toURI()).toString();
 			faceDetector = new CascadeClassifier(classifierName);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
@@ -68,7 +68,7 @@ public class OpenCVFrameProcessorConsumer extends AbstractFrameExtractorConsumer
 	}
 
 	public static void main(String[] args) {
-		AbstractKinesisVideoConsumer consumer = new OpenCVFrameProcessorConsumer();
+		AbstractKinesisVideoConsumer consumer = new OpencvFrameProcessorConsumer();
 		consumer.getMediaLoop();
 	}
 

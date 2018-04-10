@@ -102,6 +102,12 @@
 			<classifier>linux-x86</classifier>
 			-->
 		</dependency>
+
+		<!-- Other AWS SDK -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-s3</artifactId>
+		</dependency>
 	</dependencies>
 
 	<profiles>

@@ -2,6 +2,8 @@ package com.example.aws.kinesisvideo.base;
 
 import java.awt.image.BufferedImage;
 import java.math.BigInteger;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import com.amazonaws.kinesisvideo.parser.ebml.InputStreamParserByteSource;
@@ -16,7 +18,7 @@ import com.amazonaws.kinesisvideo.parser.utilities.FrameVisitor;
 import com.amazonaws.services.kinesisvideo.model.GetMediaResult;
 import com.example.aws.kinesisvideo.parser.H264FrameProcessor;
 
-public abstract class AbstractFrameExtractorConsumer extends AbstractKinesisVideoConsumer {
+public abstract class AbstractFrameExtractorWithTimestampConsumer extends AbstractKinesisVideoConsumer {
 
 	private static final int SKIP_FRAME_COUNT = Integer.parseInt(System.getProperty("skip.frame.count", "0"));
 
@@ -26,7 +28,8 @@ public abstract class AbstractFrameExtractorConsumer extends AbstractKinesisVide
 	private long previousFragmentFrameCount = 0;
 	private int skipedFrameCount = 0;
 
-	protected abstract void process(BufferedImage imageFrame);
+	protected abstract void process(BufferedImage imageFrame, BigInteger fragmentNumber, long producerSideTimestamp,
+			long sererSideTimestamp);
 
 	@Override
 	protected void consume(GetMediaResult result) {
@@ -50,8 +53,13 @@ public abstract class AbstractFrameExtractorConsumer extends AbstractKinesisVide
 					BufferedImage imageFrame = frameProcessor.getImageFrame();
 					if (imageFrame != null) {
 						if (skipedFrameCount > SKIP_FRAME_COUNT) {
-							process(imageFrame);
-							skipedFrameCount = 0;
+							Optional<FragmentMetadata> fragmentMetadataOptional = fragmentMetadataVisitor.getCurrentFragmentMetadata();
+							if (fragmentMetadataOptional.isPresent()) {
+								FragmentMetadata fragmentMetadata = fragmentMetadataOptional.get();
+								process(imageFrame, fragmentMetadata.getFragmentNumber(), fragmentMetadata.getProducerSideTimestampMillis(),
+										fragmentMetadata.getServerSideTimestampMillis());
+								skipedFrameCount = 0;
+							}
 						}
 						frameCount++;
 						skipedFrameCount++;
@@ -68,6 +76,10 @@ public abstract class AbstractFrameExtractorConsumer extends AbstractKinesisVide
 								LOG.info("---");
 								previousFragmentFrameCount = frameCount;
 								LOG.info("FragmentNumber: " + fragmentMetadata.getFragmentNumberString());
+								LOG.info(" ProducerSideTimestamp: " + DateTimeFormatter.ISO_INSTANT
+										.format(Instant.ofEpochMilli(fragmentMetadata.getProducerSideTimestampMillis())));
+								LOG.info(" ServerSideTimestamp  : " + DateTimeFormatter.ISO_INSTANT
+										.format(Instant.ofEpochMilli(fragmentMetadata.getServerSideTimestampMillis())));
 								LOG.info(" FragmentCount: " + fragmentCount);
 								LOG.info(" FrameCount: " + frameCount);
 								currentFragmentNumber = fragmentMetadata.getFragmentNumber();

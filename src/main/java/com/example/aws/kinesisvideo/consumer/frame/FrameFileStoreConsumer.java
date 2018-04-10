@@ -11,7 +11,7 @@ import com.example.aws.kinesisvideo.base.AbstractKinesisVideoConsumer;
 
 public class FrameFileStoreConsumer extends AbstractFrameExtractorConsumer {
 
-	private static final String FRAME_DIRECATORY = System.getProperty("frame.directory", "images");
+	private static final String FRAME_DIRECATORY = System.getProperty("frame.directory", "image");
 	private static final String FRAME_FILE_PREFIX = System.getProperty("frame.file.prefix", "frame-");
 	// jpg, jpeg, bmp, png etc.
 	private static final String FRAME_FILE_FORMAT = System.getProperty("frame.file.format", "jpg");
